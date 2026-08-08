@@ -119,4 +119,8 @@ public class ProductoService {
 
         dao.delete(codigo);
     }
+
+    public double calcularTotalConDescuento(Producto producto, double descuento) {
+    return producto.getPrecio() * (1 - descuento);
+}
 }
