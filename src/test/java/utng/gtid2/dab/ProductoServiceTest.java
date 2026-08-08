@@ -121,4 +121,30 @@ public class ProductoServiceTest {
                 "Vender más unidades que el stock disponible debe lanzar IllegalStateException."
         );
     }
+
+    @Test
+    void calcularTotalConDescuento_descuento10Porciento_retorna90() {
+
+        // Arrange
+        Producto producto = new Producto(
+                1,
+                "Producto prueba",
+                100.0,
+                10
+        );
+
+        // Act
+        double resultado = service.calcularTotalConDescuento(
+                producto,
+                0.10
+        );
+
+        // Assert
+        assertEquals(
+                90.0,
+                resultado,
+                0.001,
+                "El precio con 10% de descuento debe ser 90.0."
+        );
+    }
 }
