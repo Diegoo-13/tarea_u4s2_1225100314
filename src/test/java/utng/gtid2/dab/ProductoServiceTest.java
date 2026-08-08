@@ -147,4 +147,48 @@ public class ProductoServiceTest {
                 "El precio con 10% de descuento debe ser 90.0."
         );
     }
+
+    @Test
+    void calcularTotalConDescuento_productoNulo_lanzaIllegalArgumentException() {
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> service.calcularTotalConDescuento(null, 0.10),
+                "Debe lanzar IllegalArgumentException cuando el producto sea nulo."
+        );
+    }
+
+    @Test
+    void calcularTotalConDescuento_descuentoNegativo_lanzaIllegalArgumentException() {
+
+        Producto producto = new Producto(
+                1,
+                "Producto prueba",
+                100.0,
+                10
+        );
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> service.calcularTotalConDescuento(producto, -0.10),
+                "Debe lanzar IllegalArgumentException cuando el descuento sea menor que 0."
+        );
+    }
+
+    @Test
+    void calcularTotalConDescuento_descuentoMayorQueUno_lanzaIllegalArgumentException() {
+
+        Producto producto = new Producto(
+                1,
+                "Producto prueba",
+                100.0,
+                10
+        );
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> service.calcularTotalConDescuento(producto, 1.10),
+                "Debe lanzar IllegalArgumentException cuando el descuento sea mayor que 1."
+        );
+    }
 }
